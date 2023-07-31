@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
+          <ion-back-button :default-href="defaultBackLink"></ion-back-button>
         </ion-buttons>
         <ion-title>{{ pageTitle }}</ion-title>
       </ion-toolbar>
@@ -28,6 +28,7 @@ import {
 export default {
   props: {
     pageTitle: { type: String, require: true },
+    defaultBackLink: {type: String, require: false }
   },
   components: {
     IonPage,

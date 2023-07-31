@@ -1,10 +1,16 @@
 <template>
   <base-layout pageTitle="My Memories">
-    <ion-list v-for="memory in memories">
-        <ion-item>{{ memory.title }}</ion-item>
+    <ion-list>
+      <ion-item
+        v-for="memory in memories"
+        :key="memory.id"
+        
+        :router-link="`/memories/${memory.id}`"
+      >
+        {{ memory.title }}
+      </ion-item>
     </ion-list>
   </base-layout>
-  
 </template>
 
 <script>
