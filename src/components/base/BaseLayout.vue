@@ -26,6 +26,7 @@ import {
 } from "@ionic/vue";
 
 export default {
+  name: 'base-layout',
   props: {
     pageTitle: { type: String, require: true },
     defaultBackLink: {type: String, require: false }
