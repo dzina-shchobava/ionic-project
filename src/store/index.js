@@ -11,6 +11,12 @@ export default createStore({
   getters: {
     memories(state) {
       return state.memories;
+    },
+    memory(state) {
+      return ((id) => {
+        return state.memories.find((memory) => memory.id === id)
+      })
     }
+
   }
 });
