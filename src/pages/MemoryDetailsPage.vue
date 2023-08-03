@@ -1,24 +1,26 @@
 <template>
-  <base-layout pageTitle="Memory Details" defaultBackLink="/memories">
-    <h2 v-if="!loadedMemories">Loading...</h2>
-    <h2 v-else> Memory № {{ memoryId }}</h2>
+  <base-layout :pageTitle="loadedMemory.title" defaultBackLink="/memories">
+    <h2 v-if="!loadedMemory">Loading...</h2>
+    <ion-img :src="loadedMemory.image" :alt="loadedMemory.title"></ion-img>
+    <p class="ion-text-center">{{ loadedMemory.description }}</p>
   </base-layout>
 </template>
 
 <script>
-import { IonImg, IonThumbnail, IonLabel } from "@ionic/vue";
+import { IonImg } from "@ionic/vue";
 
 export default {
-  components: { IonImg, IonThumbnail, IonLabel },
+  components: { IonImg },
   data() {
     return {
       memoryId: this.$route.params.id,
     };
-  }, 
+  },
   computed: {
-    loadedMemories() {
-      return this.$store.getters.memory(this.memoryId);
-    }
+    loadedMemory() {
+      this.$store.commit("setCurrentMemoryId", this.memoryId);
+      return this.$store.getters.memory;
+    },
   },
 };
 </script>
