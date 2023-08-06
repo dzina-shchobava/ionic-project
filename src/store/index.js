@@ -20,6 +20,10 @@ export default createStore({
   mutations: {
     setCurrentMemoryId(state, id) {
       state.currentMemoryId = id;
+    },
+    addMemory(state, memory) {
+      memory.id = new Date().toString();
+      state.memories.push(memory);
     }
   },
 });

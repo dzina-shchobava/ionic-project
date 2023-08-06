@@ -2,7 +2,7 @@
   <base-layout :pageTitle="loadedMemory.title" defaultBackLink="/memories">
     <h2 v-if="!loadedMemory">Loading...</h2>
     <ion-img :src="loadedMemory.image" :alt="loadedMemory.title"></ion-img>
-    <p class="ion-text-center">{{ loadedMemory.description }}</p>
+    <p class="ion-padding">{{ loadedMemory.description }}</p>
   </base-layout>
 </template>
 

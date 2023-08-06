@@ -6,6 +6,9 @@
           <ion-back-button :default-href="defaultBackLink"></ion-back-button>
         </ion-buttons>
         <ion-title>{{ pageTitle }}</ion-title>
+        <ion-buttons slot="end">
+          <slot name="actions-end"></slot>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -26,10 +29,10 @@ import {
 } from "@ionic/vue";
 
 export default {
-  name: 'base-layout',
+  name: "base-layout",
   props: {
     pageTitle: { type: String, require: true },
-    defaultBackLink: {type: String, require: false }
+    defaultBackLink: { type: String, require: false },
   },
   components: {
     IonPage,
@@ -43,4 +46,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+
+
+</style>
