@@ -21,9 +21,19 @@ export default createStore({
     setCurrentMemoryId(state, id) {
       state.currentMemoryId = id;
     },
-    addMemory(state, memory) {
+    addOneMemory(state, memory) {
       memory.id = new Date().toString();
       state.memories.push(memory);
     }
   },
+  actions: {
+    async addMemory({state, commit}, memory) {
+      try {
+        commit('addOneMemory', memory);
+      }
+      catch {
+        alert('Error!');
+      }
+    }
+  }
 });
