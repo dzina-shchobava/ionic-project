@@ -15,15 +15,28 @@ export default createStore({
     },
     memory(state, getters) {
       return getters.memories.find((memory) => memory.id === state.currentMemoryId);
-    }
+    },
   },
   mutations: {
     setCurrentMemoryId(state, id) {
       state.currentMemoryId = id;
     },
-    addMemory(state, memory) {
+    addOneMemory(state, memory) {
       memory.id = new Date().toString();
       state.memories.push(memory);
-    }
+    },
+    removeMemory(state, id) {
+      state.memories = state.memories.filter((memory) => memory.id !== id);
+    },
   },
+  actions: {
+    async addMemory({ state, commit }, memory) {
+      try {
+        commit('addOneMemory', memory);
+      }
+      catch {
+        alert('Error!');
+      }
+    }
+  }
 });

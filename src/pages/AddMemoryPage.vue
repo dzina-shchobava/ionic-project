@@ -13,9 +13,9 @@
     },
     methods: {
       saveMemory(memory) {
-        this.$store.commit('addMemory', memory);
-        this.$router.replace('/memories');
-      },
+      this.$store.dispatch("addMemory", memory);
+      this.$router.replace("/memories");
+    },
     }
   }
 </script>
