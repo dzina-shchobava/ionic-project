@@ -12,16 +12,17 @@
           placeholder="Enter memory title"
           color="success"
           v-model="newMemoryTitle"
+          required
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-thumbnail slot="start">
-          <img :src="takenImageUrl" />
+        <ion-thumbnail slot="start" v-if="takenImageUrl">
+          <img :src="takenImageUrl"/>
         </ion-thumbnail>
-        <ion-button type="button" fill="clear" @click="takePhoto">
-          <ion-icon slot="start" :icon="camera"></ion-icon>
-          Take Photo
+        <ion-button type="button" fill="clear" @click="takePhoto" v-else>
+          <ion-icon :icon="camera" size="large"></ion-icon>
         </ion-button>
+        <p v-if="this.error">Please, Take a photo!</p>
       </ion-item>
       <ion-item>
         <ion-textarea
@@ -48,7 +49,7 @@ import {
   IonThumbnail,
   IonIcon,
 } from "@ionic/vue";
-import { camera } from 'ionicons/icons';
+import { camera, image } from 'ionicons/icons';
 import { Camera, CameraResultType } from '@capacitor/camera';
 
 export default {
@@ -69,25 +70,30 @@ export default {
       newMemoryURL: "",
       newMemoryDescription: "",
       takenImageUrl: null,
-      camera,
+      error: false,
+      camera, image
     };
   },
   methods: {
     submitNewMemory() {
-      this.$emit("save-memory", {
+      if (this.takenImageUrl) {
+        this.$emit("save-memory", {
         title: this.newMemoryTitle,
         image: this.takenImageUrl,
         description: this.newMemoryDescription,
       });
+      } else {
+        this.error = true;
+      }
     },
     async takePhoto() {
       const photo = await Camera.getPhoto({
         resultType: CameraResultType.Uri,
-        allowEditing: true,
-        quality: 60
+        quality: 60,
       });
 
       this.takenImageUrl = photo.webPath;
+      this.error = false;
     },
   },
 };
