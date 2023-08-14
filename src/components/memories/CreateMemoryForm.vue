@@ -16,11 +16,11 @@
       </ion-item>
       <ion-item>
         <ion-thumbnail slot="start">
-          <img :src="previewImageUrl" />
+          <img :src="takenImageUrl" />
         </ion-thumbnail>
         <ion-button type="button" fill="clear" @click="takePhoto">
           <ion-icon slot="start" :icon="camera"></ion-icon>
-          Take photo
+          Take Photo
         </ion-button>
       </ion-item>
       <ion-item>
@@ -68,7 +68,7 @@ export default {
       newMemoryTitle: "",
       newMemoryURL: "",
       newMemoryDescription: "",
-      previewImageUrl: null,
+      takenImageUrl: null,
       camera,
     };
   },
@@ -76,19 +76,19 @@ export default {
     submitNewMemory() {
       this.$emit("save-memory", {
         title: this.newMemoryTitle,
-        image: this.previewImageUrl,
+        image: this.takenImageUrl,
         description: this.newMemoryDescription,
       });
     },
     async takePhoto() {
       const photo = await Camera.getPhoto({
         resultType: CameraResultType.Uri,
-        source: CameraSource.Camera,
-        quality: 60,
+        allowEditing: true,
+        quality: 60
       });
 
-      this.previewImageUrl = photo.webPath;
-    }
+      this.takenImageUrl = photo.webPath;
+    },
   },
 };
 </script>
